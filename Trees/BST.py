@@ -21,8 +21,8 @@ class BST(BinaryTree):
         then each element of xs needs to be inserted into the BST.
        
        '''
-        self.root = None
-       # super().__init__()
+        
+        super().__init__()
         if xs:
             self.insert_list(xs)
 

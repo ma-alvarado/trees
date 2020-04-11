@@ -171,10 +171,10 @@ class BST(BinaryTree):
         Create a recursive staticmethod helper function,
         similar to how the insert and find functions have recursive helpers.
         '''
-       #if self.root.left == None:
-       #return self.root.value
+        #if self.root.left == None:
+        #    return self.root.value
         if self.root is None:   
-            raise ValueError("self root is None")
+            raise ValueError("type is None")
         else:
             return BST._find_smallest(self.root)
 
@@ -227,11 +227,11 @@ class BST(BinaryTree):
         HINT:
         Use a recursive helper function.
         '''
-       # if self.root is None:
-       #     return None
-       # if self.find(value):
-         #   return BST._remove(self.root, value)
-        self.root = BST._remove(self.root, value)
+        if self.root is None:
+            return None
+        if self.find(value):
+            BST._remove(self.root, value)
+        #self.root = BST._remove(self.root, value)
     
     @staticmethod
     def _remove(node, value):

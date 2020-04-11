@@ -227,11 +227,11 @@ class BST(BinaryTree):
         HINT:
         Use a recursive helper function.
         '''
-        if self.root is None:
-            return None
-        if self.find(value):
-            BST._remove(self.root, value)
-        #self.root = BST._remove(self.root, value)
+        #if self.root is None:
+        #    return None
+        #if self.find(value):
+        #    BST._remove(self.root, value)
+        self.root = BST._remove(self.root, value)
     
     @staticmethod
     def _remove(node, value):
@@ -245,15 +245,15 @@ class BST(BinaryTree):
             #Case with 0, 1 child
             if node.left is None and node.right is None:
                 return None
-            if node.left is None and node.right:
+            if node.right and node.left is None:
                 temp = node.right
                 return temp
-            if node.right is None and node.left:
+            if node.left and node.right is None:
                 temp = node.left
                 return temp
             #Case with 2 children
             #Smallest in the right subtree
-            most_left = BST.find_smallest(node.right)
+            most_left = BST._find_smallest(node.right)
 
             #Copy the in-order succesor's content to this node
             node.value = most_left

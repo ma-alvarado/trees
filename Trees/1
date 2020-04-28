@@ -88,19 +88,22 @@ class Heap(BinaryTree):
         '''
         FIXME:
         Implement this function.
-        '''  
+        ''' 
+
         if node.left and node.right:
             node.left = Heap._insert(node.left,value)
             if node.value > node.left.value:
                 return Heap._go_up(node,value)
 
         if node.left is None:
-            node.left = Node(value)
+            newnode = Node(value)
+            node.left = newnode
             if node.value > node.left.value:
                 return Heap._go_up(node,value)
 
-        elif node.right is None:
-            node.right = Node(value)
+        if node.right is None:
+            newnodetwo = Node(value)
+            node.right = newnodetwo
             if node.value > node.right.value:
                 return Heap._go_up(node,value)
 
@@ -110,8 +113,6 @@ class Heap(BinaryTree):
     @staticmethod
     def _go_up(node,value):
         
-        if Heap._is_heap_satisfied(node) == True:
-            return node
         
         if node.left and node.left.value > node.value:
             node.left = Heap._go_up(node.left, value)
@@ -166,10 +167,10 @@ class Heap(BinaryTree):
     @staticmethod
     def _find_smallest(node):
         return node.value
-  
+
     def remove_min(self):
         '''
-        Removes the minimum value from the Heap.
+        Removes the minimum value from the Heap. 
         If the heap is empty, it does nothing.
 
         FIXME:
@@ -177,69 +178,5 @@ class Heap(BinaryTree):
         '''
         if self.root is None:
             return None
-        elif self.root.left is None and self.root.right is None:
-            self.root = None
-        else:
-            right_most = Heap._right_value(self.root)
-            self.root = Heap._remove(self.root)
-            if right_most == self.root.value:
-                return
-            else:
-                self.root.value = right_most
 
-            if Heap._is_heap_satisfied(self.root) == False:
-                return Heap._go_down(self.root)
-
-    @staticmethod
-    def _remove(node):
-        if node is None:
-            return
-        elif node.right:
-            node.right = Heap._remove(node.right)
-        elif node.left:
-            node.left = Heap._remove(node.left)
-        else:
-            if node.right is None and node.left is None:
-                return None
-        return node
-
-
-    @staticmethod
-    def _right_value(node):
-        if node.left is None and node.right is None:
-            return node.value
-        elif node.right:
-            return Heap._right_value(node.right)
-        elif node.left:
-            return Heap._right_value(node.left)
-
-    @staticmethod
-    def _go_down(node):
-        if node.left is None and node.right is None:
-            return node
-
-        #x = (node.right is None or node.left.value <= node.right.value)
-        if node.left and (node.right is None or node.left.value <= node.right.value):
-            if node.left.value < node.value:
-                parent_prime = node.left.value
-                leftchild_prime = node.value
-
-                node.value = parent_prime
-                node.left.value = leftchild_prime
-
-            node.left = Heap._go_down(node.left)
-
-        #y = node.left is None or node.right.value <= node.left.value
-
-        elif node.right and (node.left is None or node.right.value <= node.left.value):
-            if node.right.value < node.value:
-                parent_primetwo = node.right.value
-                rightchild_primetwo = node.value
-
-                node.value = parent_primetwo
-                node.right.value = rightchild_primetwo
-
-            node.right = Heap._go_down(node.right)
-
-        return node
-
+        
